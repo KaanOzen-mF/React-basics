@@ -1,6 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
+import Header from "./Header";
+import Body from "./Main";
+import Footer from "./Footer";
 
+function Page() {
+  return (
+    <div>
+      <Header />
+      <Body />
+      <Footer />
+    </div>
+  );
+}
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<h1>Test</h1>);
+
+root.render(<Page />);

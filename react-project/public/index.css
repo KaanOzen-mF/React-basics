@@ -1,0 +1,21 @@
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  width: 96px;
+}
+.nav-items {
+  display: flex;
+  list-style: none;
+}
+
+.nav-items > li {
+  padding: 10px;
+}
