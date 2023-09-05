@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;600;700&display=swap");
+
+* {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000000;
+  height: 100vh;
+}
+/*Navbar Section Start*/
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #20232a;
+  color: white;
+  padding: 12px;
+  border-radius: 6px 6px 0px 0px;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #61dafb;
+}
+
+.logo-container > img {
+  width: 64px;
+}
+/*Navbar Section End*/
+
+/*Main Section Start*/
+main {
+  padding: 57px 27px;
+  color: white;
+  background-color: #282d35;
+  border-radius: 0px 0px 6px 6px;
+  background-image: url("./assets/reactLogoBackground.png"); /* Replace with your image path */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-size: contain; /* Adjust the size as needed */
+  background-position: bottom 10px left 250px;
+}
+.main-title {
+  margin: 0;
+  font-size: 39px;
+  letter-spacing: -0.05em;
+}
+.main-facts {
+  margin-top: 46px;
+  max-width: 400px;
+}
+
+.main-facts > li {
+  line-height: 19px;
+  padding-block: 10px;
+  margin-left: 18px;
+}
+
+.main-facts > li::marker {
+  align-items: center;
+  color: #61dafb;
+  font-size: 18px;
+}
+/*Main Section End*/
