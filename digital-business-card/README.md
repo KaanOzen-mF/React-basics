@@ -1,4 +1,11 @@
-# React + Vite
+# Digital Business Card Project
+
+## In This Project I use
+
+- JSX
+- Custom Components
+- Styling
+- Static Pages
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
