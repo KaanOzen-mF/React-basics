@@ -50,12 +50,36 @@ body {
 /*Hero Components End*/
 
 /*Card Componets Start*/
+.card-list {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-right: 12px;
+  align-items: end;
+  overflow-x: auto;
+}
 .card-container {
   display: flex;
   flex-direction: column;
-  width: 15%;
-  padding: 12px;
+  padding: 24px;
+  width: 100%;
+  position: relative;
 }
+
+.card-badge {
+  position: absolute;
+  background-color: white;
+  top: 30px;
+  left: 30px;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-weight: bold;
+}
+.card-img {
+  width: 100%;
+  border-radius: 9px;
+  margin-bottom: 9px;
+}
+
 .rating-container {
   display: flex;
   flex-direction: row;
