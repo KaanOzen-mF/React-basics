@@ -28,7 +28,10 @@ nav {
 /*Navbar End*/
 
 /*Form Start*/
-
+main {
+  display: flex;
+  flex-direction: column;
+}
 .form {
   display: flex;
   flex-direction: column;
@@ -65,3 +68,11 @@ nav {
   font-size: 18px;
 }
 /*Form End*/
+
+/*Meme Image Start*/
+.meme-image {
+  width: 30%;
+  align-self: center;
+  margin: 12px 0;
+}
+/*Meme Image End*/
