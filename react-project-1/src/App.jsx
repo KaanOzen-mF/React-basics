@@ -1,16 +1,18 @@
 import React from "react";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
 import Body from "./components/Body";
-import Footer from "./components/Footer";
 
-function App() {
+export default function App() {
+  const [dark, setDark] = React.useState(false);
+
+  const toggleDarkMode = () => {
+    setDark((prevTheme) => !prevTheme);
+  };
+
   return (
-    <>
-      <Header />
-      <Body />
-      <Footer />
-    </>
+    <div className="container">
+      <Navbar darkMode={dark} toggleDarkMode={toggleDarkMode} />
+      <Body darkMode={dark} />
+    </div>
   );
 }
-
-export default App;
