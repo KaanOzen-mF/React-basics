@@ -9,10 +9,13 @@ export default function Form() {
 
   const [allMeme, setallMeme] = React.useState([]);
 
-  React.useEffect(async () => {
-    const res = await fetch("https://api.imgflip.com/get_memes");
-    const data = await res.json();
-    setallMeme(data.data.memes);
+  React.useEffect(() => {
+    async function getMemes() {
+      const res = await fetch("https://api.imgflip.com/get_memes");
+      const data = await res.json();
+      setallMeme(data.data.memes);
+    }
+    getMemes();
   }, []);
 
   function getRandomMeme() {
