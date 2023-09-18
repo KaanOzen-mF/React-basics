@@ -7,16 +7,16 @@ export default function Form() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
 
-  const [allMemeImages, setAllMemeImages] = React.useState([]);
+  const [allMeme, setallMeme] = React.useState([]);
 
   React.useEffect(async () => {
     const res = await fetch("https://api.imgflip.com/get_memes");
     const data = await res.json();
-    setAllMemes(data.data.memes);
+    setallMeme(data.data.memes);
   }, []);
 
   function getRandomMeme() {
-    const memesArray = allMemeImages;
+    const memesArray = allMeme;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
     const url = memesArray[randomNumber].url;
     setMeme((prevMeme) => ({
