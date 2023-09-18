@@ -1,5 +1,4 @@
 import React from "react";
-import memesData from "../memesData";
 
 export default function Form() {
   const [meme, setMeme] = React.useState({
@@ -8,24 +7,32 @@ export default function Form() {
     randomImage: "http://i.imgflip.com/1bij.jpg",
   });
 
-  const [allMemeImages, setAllMemeImages] = React.useState(meme);
+  const [allMemeImages, setAllMemeImages] = React.useState([]);
+
+  React.useEffect(async () => {
+    const res = await fetch("https://api.imgflip.com/get_memes");
+    const data = await res.json();
+    setAllMemes(data.data.memes);
+  }, []);
 
   function getRandomMeme() {
-    const randomNumber = Math.floor(
-      Math.random() * memesData.data.memes.length
-    );
-
-    const url = memesData.data.memes[randomNumber].url;
-
-    setAllMemeImages((prevMeme) => {
-      return {
-        ...prevMeme,
-        randomImage: url,
-      };
-    });
+    const memesArray = allMemeImages;
+    const randomNumber = Math.floor(Math.random() * memesArray.length);
+    const url = memesArray[randomNumber].url;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      randomImage: url,
+    }));
   }
 
-  console.log(allMemeImages);
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setMeme((prevMeme) => ({
+      ...prevMeme,
+      [name]: value,
+    }));
+  }
+
   return (
     <main>
       <div className="form">
@@ -34,23 +41,28 @@ export default function Form() {
             className="form-input form-first-element"
             type="text"
             placeholder="top text"
-            name=""
-            id=""
+            name="topText"
+            value={meme.topText}
+            onChange={handleChange}
           />
           <input
             className="form-input"
             type="text"
             placeholder="bottom text"
-            name=""
-            id=""
+            name="bottomText"
+            value={meme.bottomText}
+            onChange={handleChange}
           />
         </div>
         <button className="form-button" onClick={getRandomMeme}>
           Get a new meme image
         </button>
       </div>
-
-      <img className="meme-image" src={allMemeImages.randomImage} />
+      <div className="meme">
+        <img src={meme.randomImage} className="meme--image" />
+        <h2 className="meme--text top">{meme.topText}</h2>
+        <h2 className="meme--text bottom">{meme.bottomText}</h2>
+      </div>
     </main>
   );
 }
