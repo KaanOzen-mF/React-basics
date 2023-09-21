@@ -3,6 +3,14 @@ import Dice from "./components/Dice";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 
+//TODO
+/*
+CSS: Put real dots on the dice 
+Track the number of rolls
+Track the time it took to win
+Save your best time to localStorage
+*/
+
 export default function App() {
   // State to manage the dice
   const [dice, setDice] = React.useState(allNewDice());
