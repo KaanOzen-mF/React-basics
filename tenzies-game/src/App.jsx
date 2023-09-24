@@ -5,10 +5,10 @@ import Confetti from "react-confetti";
 
 //TODO
 /*
-CSS: Put real dots on the dice 
-Track the number of rolls
-Track the time it took to win
-Save your best time to localStorage
+ 1) CSS: Put real dots on the dice
+ 2) Track the number of rolls
+ 3) Track the time it took to win
+ 4) Save your best time to localStorage
 */
 
 export default function App() {
@@ -30,7 +30,7 @@ export default function App() {
   }
 
   React.useEffect(() => {
-    if (areAllDiceHeld() && doAllDiceHaveSameValue) {
+    if (areAllDiceHeld() && doAllDiceHaveSameValue()) {
       setTenzies(true);
       console.log("Game Won");
     }
