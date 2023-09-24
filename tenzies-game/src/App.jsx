@@ -5,8 +5,6 @@ import Confetti from "react-confetti";
 
 //TODO
 /*
- 1) CSS: Put real dots on the dice
- 2) Track the number of rolls
  3) Track the time it took to win
  4) Save your best time to localStorage
 */
@@ -14,6 +12,9 @@ import Confetti from "react-confetti";
 export default function App() {
   // State to manage the dice
   const [dice, setDice] = React.useState(allNewDice());
+
+  //State to manage the roll number
+  const [rollTracker, setRollTracker] = React.useState(-1);
 
   //State to manage the tenzies game win game decide
   const [tenzies, setTenzies] = React.useState(false);
@@ -33,7 +34,10 @@ export default function App() {
     if (areAllDiceHeld() && doAllDiceHaveSameValue()) {
       setTenzies(true);
       console.log("Game Won");
+      setRollTracker(-1); //reset roll tracker
     }
+
+    setRollTracker((prevVal) => prevVal + 1); // roll tracker counter
   }, [dice]);
 
   // Function to generate a new die
@@ -94,6 +98,8 @@ export default function App() {
         Roll until all dice are the same. Click each die to freeze it at its
         current value between rolls.
       </p>
+      <p>{rollTracker}</p>
+
       <div className="dice-container">{diceElements}</div>
       {tenzies && <Confetti />}
       <button onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
