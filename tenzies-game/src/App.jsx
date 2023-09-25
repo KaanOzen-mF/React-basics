@@ -3,21 +3,27 @@ import Dice from "./components/Dice";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 
-//TODO
-/*
- 3) Track the time it took to win
- 4) Save your best time to localStorage
-*/
-
 export default function App() {
+  const lastRollScore = localStorage.getItem("rollTracker"); //Get last roll number from local storage
+
+  const bestTime = localStorage.getItem("bestTime"); //
+  const intervalRef = React.useRef(null);
   // State to manage the dice
   const [dice, setDice] = React.useState(allNewDice());
 
   //State to manage the roll number
-  const [rollTracker, setRollTracker] = React.useState(-1);
+  const [rollTracker, setRollTracker] = React.useState(
+    localStorage.getItem("rollTracker") || 0
+  );
 
   //State to manage the tenzies game win game decide
   const [tenzies, setTenzies] = React.useState(false);
+
+  //State to manage the seconds
+  const [seconds, setSeconds] = React.useState(0);
+
+  //State to manage to stop seconds
+  const [isActive, setIsActive] = React.useState(true);
 
   // Function to check if all dice are held
   function areAllDiceHeld() {
@@ -33,12 +39,29 @@ export default function App() {
   React.useEffect(() => {
     if (areAllDiceHeld() && doAllDiceHaveSameValue()) {
       setTenzies(true);
-      console.log("Game Won");
-      setRollTracker(-1); //reset roll tracker
+      const currentBestTime = localStorage.getItem("bestTime");
+      if (!currentBestTime || seconds < currentBestTime) {
+        localStorage.setItem("bestTime", seconds);
+      }
+      clearInterval(intervalRef.current);
+      setIsActive(false);
+      clearInterval(intervalRef.current); // Clear the interval
+      localStorage.setItem("rollTracker", rollTracker);
     }
-
-    setRollTracker((prevVal) => prevVal + 1); // roll tracker counter
   }, [dice]);
+
+  //Effect to manage to seconds
+  React.useEffect(() => {
+    if (isActive) {
+      intervalRef.current = setInterval(() => {
+        // Store the interval ID
+        setSeconds((prevSeconds) => prevSeconds + 1);
+      }, 1000);
+    } else {
+      clearInterval(intervalRef.current); // Clear the interval
+    }
+    return () => clearInterval(intervalRef.current);
+  }, [isActive]);
 
   // Function to generate a new die
   function generateNewDie() {
@@ -60,6 +83,7 @@ export default function App() {
 
   // Function to roll the dice
   function rollDice() {
+    setRollTracker((prevVal) => prevVal + 1); // Increment rollTracker
     if (!tenzies) {
       setDice((oldDice) =>
         oldDice.map((die) => {
@@ -69,6 +93,9 @@ export default function App() {
     } else {
       setTenzies(false);
       setDice(allNewDice());
+      setRollTracker(0);
+      setSeconds(0);
+      setIsActive(true);
     }
   }
 
@@ -98,7 +125,16 @@ export default function App() {
         Roll until all dice are the same. Click each die to freeze it at its
         current value between rolls.
       </p>
-      <p>{rollTracker}</p>
+      <div className="game-info-container">
+        <div>
+          <p>Roll Number: {rollTracker}</p>
+          <p className="score-container">Latest Roll Score: {lastRollScore}</p>
+        </div>
+        <div>
+          <p>Current Time: {seconds}</p>
+          <p className="score-container">Best Time: {bestTime}</p>
+        </div>
+      </div>
 
       <div className="dice-container">{diceElements}</div>
       {tenzies && <Confetti />}
