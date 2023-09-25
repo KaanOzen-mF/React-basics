@@ -7,20 +7,23 @@ export default function Dice(props) {
 
   // Mapping of dot positions for each value
   const dotPositions = [
-    [], // 0 (not used)
-    [4], // 1
-    [0, 8], // 2
-    [0, 4, 8], // 3
-    [0, 2, 6, 8], // 4
-    [0, 2, 4, 6, 8], // 5
-    [0, 2, 3, 5, 6, 8], // 6
+    [], // 0
+    [0], // 1
+    [0, 1], // 2
+    [0, 1, 2], // 3
+    [0, 1, 2, 3], // 4
+    [0, 1, 2, 3, 4], // 5
+    [0, 1, 2, 3, 4, 5], // 6
   ];
 
   const dots = dotPositions[props.value].map((position, index) => (
     <div
       key={index}
       className={`dot dot-${index + 1}`}
-      style={{ gridArea: position }}
+      style={{
+        gridArea: position,
+        backgroundColor: "#ffffff", // Ensure dots are white
+      }}
     />
   ));
 
