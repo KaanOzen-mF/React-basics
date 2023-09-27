@@ -1,19 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
 import Home from "./components/Home";
 import Quiz from "./components/Quiz";
+import { nanoid } from "nanoid";
+
+import { decode } from "html-entities";
 
 function App() {
-  //State to manage start to quiz game
-  const [start, setStart] = React.useState(true);
+  const [start, setStart] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null);
+  const [questionArray, setQuestionArray] = useState([]);
 
-  //Handle function for home page start quiz button
   const handleStart = () => {
-    setStart((preVal) => !preVal);
-    console.log(start);
+    setStart((prevVal) => !prevVal);
+
+    const apiUrl = `https://opentdb.com/api.php?amount=10&category=${selectedCategory}&difficulty=${selectedDifficulty}&type=multiple`;
+
+    fetch(apiUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        setQuestionArray(data.results); // Update state with fetched data
+      });
   };
 
-  //Conditional render for JSX elements
-  return <>{start ? <Home startBtn={handleStart} /> : <Quiz />}</>;
+  const mergedAnswers = questionArray.map((question) => {
+    const allAnswers = [...question.incorrect_answers, question.correct_answer];
+    const shuffledAnswers = [...allAnswers].sort(() => Math.random() - 0.5);
+    return {
+      allAnswers: shuffledAnswers,
+    };
+  });
+
+  console.log(mergedAnswers);
+
+  const categoryOptions = [
+    { value: "9", label: "Any Category" },
+    { value: "10", label: "General Knowledge" },
+    { value: "11", label: "Entertainment: Books" },
+    { value: "12", label: "Entertainment: Music" },
+    {
+      value: "13",
+      label: "Entertainment: Musicals & Theatres",
+    },
+    { value: "14", label: "Entertainment: Television" },
+    {
+      value: "15",
+      label: "Entertainment: Video Games",
+    },
+    {
+      value: "16",
+      label: "Entertainment: Board Games",
+    },
+    { value: "17", label: "Science & Nature" },
+    { value: "18", label: "Science: Computers" },
+    { value: "19", label: "Science: Mathematics" },
+    { value: "20", label: "Mythology" },
+    { value: "21", label: "Sports" },
+    { value: "22", label: "History" },
+    { value: "23", label: "Politics" },
+    { value: "24", label: "Art" },
+    { value: "25", label: "Celebrities" },
+    { value: "26", label: "Animals" },
+  ];
+  const difficultyOptions = [
+    { value: "easy", label: "Easy" },
+    { value: "medium", label: "Medium" },
+    { value: "hard", label: "Hard" },
+  ];
+  const options = [categoryOptions, difficultyOptions];
+
+  return (
+    <>
+      {start ? (
+        <Home
+          startBtn={handleStart}
+          options={options}
+          setSelectedCategory={setSelectedCategory}
+          setSelectedDifficulty={setSelectedDifficulty}
+        />
+      ) : (
+        <Quiz questions={questionArray} answers={mergedAnswers} />
+      )}
+    </>
+  );
 }
 
 export default App;
