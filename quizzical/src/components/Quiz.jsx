@@ -49,7 +49,7 @@ export default function Quiz(props) {
                         selectedAnswers[index] === answer &&
                         !results[index]
                       ? "incorrect"
-                      : "other"
+                      : ""
                   }`}
                 >
                   {decode(answer)}

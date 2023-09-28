@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import Home from "./components/Home";
 import Quiz from "./components/Quiz";
-import { nanoid } from "nanoid";
-
-import { decode } from "html-entities";
 
 function App() {
   const [start, setStart] = useState(true);
