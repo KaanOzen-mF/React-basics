@@ -22,12 +22,23 @@ Users are allowed to:
 
 ## [Screenshot](#screenshot)
 
-![Quiz selection screen](image.png)
-![Questions screen - 1](image-1.png)
-![Question screen - 2l](image-2.png)
-![Correct question screen](image-3.png)
-![Incorrect question screen](image-4.png)
-![Score and play again btn screen](image-5.png)
+- Quiz Settings Screen
+  ![Quiz selection screen](image.png)
+
+- Question Screen - 1
+  ![Questions screen - 1](image-1.png)
+
+- Question Screen - 2
+  ![Question screen - 2l](image-2.png)
+
+- Correnct Question Screen
+  ![Correct question screen](image-3.png)
+
+- Incorrect Question Screen
+  ![Incorrect question screen](image-4.png)
+
+- Score and Play Again Button Screen
+  ![Score and play again btn screen](image-5.png)
 
 ## [Links](#links)
 
