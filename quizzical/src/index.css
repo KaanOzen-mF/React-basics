@@ -125,21 +125,47 @@
   width: 80%;
 }
 
-.check-answer-btn {
-  margin-top: 12px;
+.play-again-btn {
   background-color: #293264;
   color: white;
   width: 20%;
   height: 64px;
   font-size: 18px;
   border-radius: 12px;
-  margin-left: 35%;
-  margin-bottom: 24px;
 }
 
+.play-again-btn:hover,
 .check-answer-btn:hover {
   box-shadow: 1px 0px 5px 0px rgb(255, 255, 255) inset;
   -webkit-box-shadow: 1px 0px 5px 0px rgb(255, 255, 255) inset;
   -moz-box-shadow: 1px 0px 5px 0px rgb(255, 255, 255) inset;
+}
+
+.check-answer-btn {
+  background-color: #293264;
+  color: white;
+  width: 20%;
+  height: 64px;
+  font-size: 18px;
+  border-radius: 12px;
+  margin-left: 30%;
+  margin-bottom: 12px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+  justify-content: center;
+  padding-right: 10%;
+  margin-bottom: 12px;
+}
+
+.button-container > p {
+  color: #293264;
+  font-weight: 700;
+  font-size: 24px;
+  margin-right: 12px;
 }
 /*Quiz Page Design End*/
