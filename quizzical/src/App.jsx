@@ -20,6 +20,10 @@ function App() {
       });
   };
 
+  const handlePlayAgain = () => {
+    setStart((prevVal) => !prevVal);
+  };
+
   const mergedAnswers = questionArray.map((question) => {
     const allAnswers = [...question.incorrect_answers, question.correct_answer];
     const shuffledAnswers = [...allAnswers].sort(() => Math.random() - 0.5);
@@ -27,8 +31,6 @@ function App() {
       allAnswers: shuffledAnswers,
     };
   });
-
-  console.log(mergedAnswers);
 
   const categoryOptions = [
     { value: "9", label: "Any Category" },
@@ -76,7 +78,11 @@ function App() {
           setSelectedDifficulty={setSelectedDifficulty}
         />
       ) : (
-        <Quiz questions={questionArray} answers={mergedAnswers} />
+        <Quiz
+          questions={questionArray}
+          answers={mergedAnswers}
+          startBtn={handlePlayAgain}
+        />
       )}
     </>
   );
