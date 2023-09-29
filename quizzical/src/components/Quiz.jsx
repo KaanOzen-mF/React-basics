@@ -25,6 +25,9 @@ export default function Quiz(props) {
     setAnswersChecked(true);
   };
 
+  const correctCount = results.filter(Boolean).length; // Count of correct answers
+  const totalCount = props.questions.length; // Total number of questions
+
   console.log("results: ", results);
 
   return (
@@ -60,16 +63,22 @@ export default function Quiz(props) {
           </div>
         );
       })}
-      <button className="check-answer-btn" onClick={checkAnswers}>
-        Check Answer
-      </button>
-      <div>
-        {results.map((result, index) => (
-          <div key={index}>
-            Question {index + 1}: {result ? "Correct" : "Incorrect"}
-          </div>
-        ))}
-      </div>
+
+      {answersChecked ? (
+        <div className="button-container">
+          <p>
+            You scored {correctCount}/{totalCount} correct answers
+          </p>
+
+          <button className="play-again-btn" onClick={props.startBtn}>
+            Play Again
+          </button>
+        </div>
+      ) : (
+        <button className="check-answer-btn" onClick={checkAnswers}>
+          Check Answer
+        </button>
+      )}
     </div>
   );
 }
